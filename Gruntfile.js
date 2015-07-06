@@ -140,6 +140,15 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+		gitpull : {
+			task : {
+				options : {
+					remote: 'origin',
+					branch : 'master',
+					cwd : '/home/ragesh/Workspaces/grunt_ws/sample-demo'
+				}
+			}
+		},
 		gittag : {
 			addtag : {
 				options : {
@@ -158,5 +167,5 @@ module.exports = function (grunt) {
 			'ngtemplates',
 			'connect', 'watch']);
 
-	grunt.registerTask('git-release', ['gitadd', 'gitcommit', 'gitpush']);
+	grunt.registerTask('git-release', ['gitadd', 'gitcommit', 'gitpull', 'gitpush']);
 }
