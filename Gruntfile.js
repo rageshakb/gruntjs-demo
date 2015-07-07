@@ -4,30 +4,16 @@ module.exports = function (grunt) {
 
 	require('load-grunt-tasks')(grunt);
 
+	var paths = {
+		src : 'src',
+		dest : 'dist'
+	};
+
 	grunt.initConfig({
 		pkg : grunt.file.readJSON('package.json'),
-
-		/*bower_concat : {
-			all : {
-				options : {
-					separator : ';\n'
-				},
-				dest : 'dist/scripts/libs.js',
-				mainFiles : {
-					'requirejs' : 'require.js',
-					'angular' : 'angular.js',
-					'angular-route' : 'angular-route.js',
-					'jquery' : 'src/jquery.js',
-					'bootstrap' : 'dist/js/bootstrap.js'
-				},
-				dependencies: {
-				  'bootstrap': ['requirejs', 'jquery'],
-				   'angular' : 'requirejs'
-
-				}
-			}
-		},*/
-		uglify : {
+		paths : paths,
+		
+		/*uglify : {
 			javascript : {
 				options : {
 					compress : true
@@ -37,7 +23,7 @@ module.exports = function (grunt) {
 					'dist/scripts/app.min.js' : 'src/scripts/app.js'
 				}
 			}
-		},
+		},*/
 		/*concat : {
 			javascript : {
 				src : ['src/app.js'],
@@ -97,18 +83,18 @@ module.exports = function (grunt) {
 				tasks : ['newer:jshint', 'newer:uglify']
 			},
 			templates : {
-				options: {
+				/*options: {
           			livereload: true
-        		},
+        		},*/
 				files : ['src/templates/**/*.html'],
-				tasks : ['newer:ngtemplates']
+				tasks : ['ngtemplates']
 			}
 		},
 		connect: {
 		  task: { // give your task a name
 		    options: {
 		      port: 9000, // configure your port here
-		      base: '.',//./dest // configure your site distribution path here		      
+		      base: 'dist',//./dest // configure your site distribution path here		      
 			  message: '<%= pkg.name %> build finished successfully.'
 		    }
 		  }
@@ -152,20 +138,85 @@ module.exports = function (grunt) {
 		gittag : {
 			addtag : {
 				options : {
-					tag: '0.0.1',
-                	message: 'Testing'
+					tag: '1.0.0',
+                	message: 'Testing',
+                	cwd : '/home/ragesh/Workspaces/grunt_ws/sample-demo'
 				}
 			}
+		},
+
+		useminPrepare : {
+			/*html : 'src/index.html',
+			options : {
+				root: 'src',
+				dest : 'dist'
+			}*/	
+			html: 'src/index.html',
+        	options: {
+          		dest: 'dist'
+        	}		
+		},
+		usemin : {
+			//html : 'dist/index.html',
+			/*options: {
+                dirs: ['src']
+            },*/
+            //html: ['src/**/*.html']
+             html: ['dist/{,*/}*.html'],
+        	 css: ['dist/css/{,*/}*.css'],
+        	 options: {
+          		dirs: ['dist']
+        	}
+		},
+		copy : {
+			templates : {
+				files : [{
+				expand : true,
+				cwd : 'src',
+				src : ['templates/**/*.html', 'index.html'],
+				dest : 'dist'
+			}]
+		}
+			
+		},
+		clean : {
+			src : ['dist']
 		}
 		
 	});
+	
 
-	grunt.registerTask('build', ['jshint', 
-		//'bower_concat', 'concat',
-			 'uglify',
-			//'cssmin', 
-			'ngtemplates',
-			'connect', 'watch']);
+	grunt.registerTask('git-release',
+	 [
+	 	'gitadd',
+	 	'gitcommit',
+	 	'gitpull',
+	 	'gitpush'
+	 ]);
 
-	grunt.registerTask('git-release', ['gitadd', 'gitcommit', 'gitpull', 'gitpush']);
+	grunt.registerTask('use', 
+	[
+	 	'clean',
+	 	'copy',
+	  	'useminPrepare',
+	  	'concat',	  
+	  	'uglify',
+	  	'cssmin',	  
+	  	'usemin'
+	]);
+
+	grunt.registerTask('build', 
+	[ 
+	  'clean',
+	  'jshint',
+	  'copy',
+	  'useminPrepare',
+	  'concat',	  
+	  'uglify',
+	  'cssmin',	    
+	  'ngtemplates',
+	  'usemin',	
+	  'connect',
+	  'watch'
+	]);
 }

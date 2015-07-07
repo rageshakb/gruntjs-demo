@@ -3,7 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Build Automation using GruntJS</title>
+	<!-- build:css css/styles.css -->
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<!-- endbuild -->
 	
 </head>
 <body ng-controller="MainCtrl">
@@ -17,13 +19,20 @@
 		<ng-view></ng-view>
 	</div>
 
+	<!-- build:js scripts/bower.js -->
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-route/angular-route.min.js"></script>
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>		
 	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- endbuild -->
 
-	<script type="text/javascript" src = "dist/scripts/app.min.js"></script>
-	<script type="text/javascript" src = "dist/scripts/templates.js"></script>
+	<!-- build:js(.) scripts/main.js -->
+		<script src="scripts/app.js"></script>	
+		<script src="scripts/app1.js"></script>	
+		<script src="scripts/template.js"></script>	
+	<!-- endbuild -->
+	
+	
 	<script src="http://localhost:35729/livereload.js"></script>
 	
 </body>

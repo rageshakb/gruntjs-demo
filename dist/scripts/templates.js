@@ -7,12 +7,12 @@ angular.module('mainApp').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('templates/messages.html',
-    "<h3>Welcome to the message sections !!!</h3>"
+    "<h3>Welcome to the messages sections !!!</h3>"
   );
 
 
   $templateCache.put('templates/profiles.html',
-    "<h3>Welcome to the profile page!!!</h3>"
+    "<h3>Welcome to the profiles page!!!</h3>"
   );
 
 }]);

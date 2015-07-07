@@ -4,13 +4,13 @@ mainApp.config(['$routeProvider', function($routeProvider) {
 
 	$routeProvider.
 		when('/profile', {
-			templateUrl : 'src/templates/profiles.html'
+			templateUrl : 'templates/profiles.html'
 		}).
 		when('/messages', {
-			templateUrl : 'src/templates/messages.html'
+			templateUrl : 'templates/messages.html'
 		}).
 		when('/home', {
-			templateUrl : 'src/templates/home.html'
+			templateUrl : 'templates/home.html'
 		}).
 		otherwise({ redirectTo: '/home' })
 }])

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Build Automation using GruntJS</title>
+	<link rel="stylesheet" href="css/styles.css">
+	
+</head>
+<body ng-controller="MainCtrl">
+	<ul class="nav nav-tabs">
+	  <li role="presentation" class="active"><a href="#/home">Home</a></li>
+	  <li role="presentation"><a href="#/profile">Profile</a></li>
+	  <li role="presentation"><a href="#/messages">Messages</a></li>
+	</ul>
+
+	<div class="container">
+		<ng-view></ng-view>
+	</div>
+
+	<script src="scripts/bower.js"></script>
+
+	<script src="scripts/main.js"></script>
+
+	<script src="scripts/templates.js"></script>
+	
+	
+	<script src="http://localhost:35729/livereload.js"></script>
+	
+</body>
+</html>
